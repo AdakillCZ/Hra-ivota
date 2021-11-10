@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Hra_Života
 {
-    class Hra
+    public class Hra
     {
         const int SIRKA = 5;
         const int VYSKA = 5;
 
-        Bunka[,] hraciDeska;
+        public Bunka[,] hraciDeska;
 
         public Hra()
         {
@@ -31,11 +31,38 @@ namespace Hra_Života
         public int OkoliBunkyZive(Bunka bunka)
         {
             if (bunka == null) return -1;
+
             int celkovyPocet = 0;
 
+          
 
-            
-            return 0;
+            for (int i = bunka.PosX - 1; i < bunka.PosX + 1; i++) 
+            {
+                for (int j = bunka.PosY - 1; j < bunka.PosY + 1; j++)
+                {
+                    if (i == bunka.PosX && j == bunka.PosY)
+                    {
+                        continue;
+                    } else
+                    {
+                        try
+                        {
+
+                            Bunka sousedniBunka = hraciDeska[bunka.PosX + 1, bunka.PosY + 1];
+
+                            if (sousedniBunka.JeZiva) celkovyPocet++;
+
+
+                        }
+                        catch (IndexOutOfRangeException e)
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
+
+            return celkovyPocet;
         }
     }
 }
