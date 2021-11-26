@@ -86,5 +86,9 @@ namespace Hra_Života
                 }
             }
         }
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }
