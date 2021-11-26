@@ -9,22 +9,23 @@ namespace Hra_Života
 
             Hra hra = new Hra();
 
-            for (int i = 0; i < hra.hraciDeska.Length; i++ )
-            {
-                for (int j = 0; j < hra.hraciDeska.Length; j++)
-                {
-                    try
-                    {
-                        Bunka bunka = hra.hraciDeska[i, j];
+            //for (int i = 0; i < hra.hraciDeska.Length; i++)
+            //{
+            //    for (int j = 0; j < hra.hraciDeska.Length; j++)
+            //    {
+            //        try
+            //        {
+            //            Bunka bunka = hra.hraciDeska[i, j];
 
-                        Console.WriteLine("Bunka na souradnicich ma sousedu x: " + i + ", y:" + j + " " + hra.OkoliBunkyZive(bunka));
+            //            Console.WriteLine("Bunka na souradnicich ma sousedu x: " + i + ", y:" + j + " " + hra.OkoliBunkyZive(bunka));
 
-                    } catch (IndexOutOfRangeException e)
-                    {
-                        continue;
-                    }                    
-                }
-            }            
+            //        }
+            //        catch (IndexOutOfRangeException e)
+            //        {
+            //            continue;
+            //        }
+            //    }
+            //}
         }
     }
 }

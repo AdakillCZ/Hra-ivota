@@ -43,6 +43,26 @@ namespace Hra_Života
                 _posX = value;
             }
         }
-        
+
+        public void aktivatorBunky(int pocetZivychBunekVOkoli)
+        {
+            if (this.JeZiva)
+            {
+                if (pocetZivychBunekVOkoli < 2 || pocetZivychBunekVOkoli > 3)
+                {
+                    this.JeZiva = false;
+                }
+            }
+
+            else
+            {
+                if (pocetZivychBunekVOkoli == 3)
+                {
+                    this.JeZiva = true;
+                }
+            }
+            
+
+        }
     }
 }

@@ -64,5 +64,27 @@ namespace Hra_Života
 
             return celkovyPocet;
         }
+
+        public void update()
+        {
+            for (int i = 0; i < this.hraciDeska.Length; i++)
+            {
+                for (int j = 0; j < this.hraciDeska.Length; j++)
+                {
+                    try
+                    {
+                        Bunka bunka = this.hraciDeska[i, j];
+
+                        //Console.WriteLine("Bunka na souradnicich ma sousedu x: " + i + ", y:" + j + " " + hra.OkoliBunkyZive(bunka));
+                        int pocetSousedu = this.OkoliBunkyZive(bunka);
+                        bunka.aktivatorBunky(pocetSousedu);
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        continue;
+                    }
+                }
+            }
+        }
     }
 }
