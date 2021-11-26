@@ -6,23 +6,23 @@ namespace Hra_Života
 {
     public class Hra
     {
-        const int SIRKA = 5;
-        const int VYSKA = 5;
+        const int SIRKA = 80;
+        const int VYSKA = 80;
 
         public Bunka[,] hraciDeska;
 
         public Hra()
         {
             Random random = new Random();
-            
+
             hraciDeska = new Bunka[SIRKA, VYSKA];
-            for (int i = 0; i < VYSKA; i++)
+            for (int i = 0; i < hraciDeska.GetLength(0); i++)
             {
-                for (int x = 0; x < SIRKA; x++)
+                for (int j = 0; j < hraciDeska.GetLength(1); j++)
                 {
                     int rnd = random.Next(2);
                     bool zivost = (rnd == 0);
-                    hraciDeska[i, x] = new Bunka(zivost, i, x);
+                    hraciDeska[i, j] = new Bunka(zivost, i, j);
                 }
             }
         }
@@ -34,16 +34,16 @@ namespace Hra_Života
 
             int celkovyPocet = 0;
 
-          
 
-            for (int i = bunka.PosX - 1; i < bunka.PosX + 1; i++) 
+            for (int i = bunka.PosX - 1; i < bunka.PosX + 1; i++)
             {
                 for (int j = bunka.PosY - 1; j < bunka.PosY + 1; j++)
                 {
                     if (i == bunka.PosX && j == bunka.PosY)
                     {
                         continue;
-                    } else
+                    }
+                    else
                     {
                         try
                         {
@@ -51,7 +51,6 @@ namespace Hra_Života
                             Bunka sousedniBunka = hraciDeska[bunka.PosX + 1, bunka.PosY + 1];
 
                             if (sousedniBunka.JeZiva) celkovyPocet++;
-
 
                         }
                         catch (IndexOutOfRangeException e)
@@ -67,28 +66,44 @@ namespace Hra_Života
 
         public void update()
         {
-            for (int i = 0; i < this.hraciDeska.Length; i++)
+            for (int i = 0; i < this.hraciDeska.GetLength(0); i++)
             {
-                for (int j = 0; j < this.hraciDeska.Length; j++)
+                for (int j = 0; j < this.hraciDeska.GetLength(1); j++)
                 {
-                    try
-                    {
-                        Bunka bunka = this.hraciDeska[i, j];
+                    Bunka bunka = this.hraciDeska[i, j];
+                    //Console.WriteLine("Bunka na souradnicich ma sousedu x: " + i + ", y:" + j + " " + hra.OkoliBunkyZive(bunka));
+                    int pocetSousedu = this.OkoliBunkyZive(bunka);
+                    bunka.aktivatorBunky(pocetSousedu);
 
-                        //Console.WriteLine("Bunka na souradnicich ma sousedu x: " + i + ", y:" + j + " " + hra.OkoliBunkyZive(bunka));
-                        int pocetSousedu = this.OkoliBunkyZive(bunka);
-                        bunka.aktivatorBunky(pocetSousedu);
-                    }
-                    catch (IndexOutOfRangeException e)
-                    {
-                        continue;
-                    }
                 }
             }
         }
+
+
         public override string ToString()
         {
-            return base.ToString();
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < hraciDeska.GetLength(0); i++)
+            {
+                for (int j = 0; j < hraciDeska.GetLength(1); j++)
+                {
+                    Bunka bunka = hraciDeska[i, j];
+
+                    if (bunka.JeZiva)
+                    {
+                        sb.Append("X ");
+                    }
+                    else
+                    {
+                        sb.Append("  ");
+                    }
+                }
+
+                sb.AppendLine();
+            }
+
+            return sb.ToString();
         }
     }
 }
